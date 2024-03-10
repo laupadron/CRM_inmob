@@ -3,7 +3,7 @@ import usersRoutes from './routes/users_routes.js'
 
 const app = new Application();
 
-app.use(usersRoutes.usersRoutes())
+app.use(usersRoutes.routes())
 
 
 
