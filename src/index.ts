@@ -1,10 +1,10 @@
 import { Application } from "https://deno.land/x/oak@14.2.0/mod.ts";
-import usersRoutes from './routes/users_routes.js';
+import router from './routes/routes.ts'
 
 
 const app = new Application();
 
-app.use(usersRoutes.routes())
+app.use(router.routes())
 
 
 
