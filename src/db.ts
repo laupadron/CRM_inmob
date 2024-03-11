@@ -9,17 +9,23 @@ const pool = new Pool(databaseUrl, 3, true);
 // Connect to the database
 const connection = await pool.connect();
 
+console.log("Connected to the database");
+
 try {
   // Create the table
   await connection.queryObject`
-    CREATE TABLE IF NOT EXISTS todos (
+    CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY,
       title TEXT NOT NULL
     )
   `;
+
+  console.log("Table 'users' created successfully");
+} catch (error) {
+  console.error("Error executing SQL query:", error);
 } finally {
   // Release the connection back into the pool
   connection.release();
 }
 
-export default Pool
+
