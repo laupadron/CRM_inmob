@@ -6,9 +6,6 @@ const app = new Application();
 
 app.use(usersRoutes.routes())
 
-app.listen(3000, () =>{
-    console.log('server is running')
-})
 
 
 await app.listen({ port: 8000 });
