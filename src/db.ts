@@ -21,3 +21,5 @@ try {
   // Release the connection back into the pool
   connection.release();
 }
+
+export default Pool

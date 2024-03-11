@@ -1,5 +1,5 @@
-import client from '../db.ts';
+// import Pool from '../db.ts';
 
-export async function search(_params = {}){
-return await client.execute('SELECT * from user')
-}
+// export async function search(_params = {}){
+// console.log('hola')
+// }
