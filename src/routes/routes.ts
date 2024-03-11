@@ -6,6 +6,6 @@ const router = new Router();
 
 router
 .get('/', welcome )
-  .get("/users", getAllUsers);
+.get("/users", getAllUsers);
 
 export default router;
