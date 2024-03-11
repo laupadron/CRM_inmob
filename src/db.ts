@@ -1,23 +1,23 @@
-import { Client } from "https://deno.land/x/mysql@v2.12.1/mod.ts";
+import { Pool } from "https://deno.land/x/postgres@v0.17.0/mod.ts";
 
+// Get the connection string from the environment variable "DATABASE_URL"
+const databaseUrl = Deno.env.get("DATABASE_URL")!;
 
-const client = await new Client().connect({
-    hostname: Deno.env.get("DB_HOST") || '127.0.0.1',
-    port: parseInt(Deno.env.get("DB_PORT") || '3306'),
-    username: Deno.env.get("DB_USER") || 'root',
-    password: Deno.env.get("DB_PASSWORD") || '',
-    db: Deno.env.get("DB_DATABASE") || 'crm_inmob',
-});
+// Create a database pool with three connections that are lazily established
+const pool = new Pool(databaseUrl, 3, true);
 
+// Connect to the database
+const connection = await pool.connect();
 
-// const client = await new Client().connect(
-    
-//     {
-//     hostname:'127.0.0.1',
-//     username: 'root',
-//     db: 'crm_inmob',
-//     password: ''
-// }
-// );
-
-export default client;
+try {
+  // Create the table
+  await connection.queryObject`
+    CREATE TABLE IF NOT EXISTS todos (
+      id SERIAL PRIMARY KEY,
+      title TEXT NOT NULL
+    )
+  `;
+} finally {
+  // Release the connection back into the pool
+  connection.release();
+}
