@@ -3,7 +3,7 @@ import { Client } from "https://deno.land/x/mysql@v2.12.1/mod.ts";
 
 
 const databaseConfig = {
-    host: Deno.env.get("DB_HOST") || "localhost",
+    host: Deno.env.get("DB_HOST") || "127.0.0.1",
     port: parseInt(Deno.env.get("DB_PORT") || "3306"),
     user: Deno.env.get("DB_USER") || "root",
     password: Deno.env.get("DB_PASSWORD") || "",
